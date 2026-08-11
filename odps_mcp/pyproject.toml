@@ -1,0 +1,21 @@
+[project]
+name = "odps-mcp"
+version = "1.2.0"
+description = "MCP Server for Alibaba Cloud MaxCompute (ODPS) - SQL query, data export, upload, and DDL/DML execution"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+    "pyodps>=0.12.0",
+    "pandas>=1.5.0",
+    "openpyxl>=3.0.0",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]

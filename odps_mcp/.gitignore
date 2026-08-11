@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# 本地配置与凭据（绝不提交）
+.env
+.env.local
+
+# macOS
+.DS_Store
