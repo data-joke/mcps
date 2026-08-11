@@ -33,7 +33,7 @@ execute(sql_file="/path/to/migration.sql", confirm=True)
 ## 快速开始 A：手动安装
 
 ```bash
-git clone <本仓库地址> && cd pgsql-mcp
+git clone https://github.com/data-joke/mcps.git && cd mcps/pgsql-mcp
 pip install -r requirements.txt
 cp .env.example .env   # 编辑填入 PostgreSQL 连接信息
 ```
@@ -65,23 +65,28 @@ cp .env.example .env   # 编辑填入 PostgreSQL 连接信息
 ````markdown
 你是 MCP 安装助手，帮我安装 `pgsql-mcp`（一个通过 MCP 协议操作 PostgreSQL 的本地工具）。
 
-- 源码：本仓库根目录（README 所在目录），server.py 在仓库根目录。请让用户确定源码在本机的绝对路径，后续所有路径都用绝对路径。
 - 通信：stdio
 - 安装步骤（按顺序执行，每步向用户确认）：
 
-1. **采集信息**
+1. **获取源码**——先让用户确定下载目录，然后执行：
+   ```bash
+   git clone https://github.com/data-joke/mcps.git
+   cd mcps/pgsql-mcp
+   ```
+
+2. **采集信息**
    - Python 解释器绝对路径（让用户跑 `which python3`）
    - PostgreSQL 连接信息：HOST / PORT（默认 5432）/ USER / PASSWORD / DATABASE
    - 明确告知：密码会以明文写入 MCP 客户端配置或本目录 `.env`，文件将 `chmod 600`
 
-2. **装依赖 + 写配置**
+3. **装依赖 + 写配置**
    ```bash
    cd <源码所在目录>
    pip install -r requirements.txt
    cp .env.example .env   # 编辑填入连接信息，或直接在客户端配置的 env 字段里填
    ```
 
-3. **写入 MCP 客户端配置**（按用户所用客户端写入对应 JSON，结构如下）
+4. **写入 MCP 客户端配置**（按用户所用客户端写入对应 JSON，结构如下）
    ```json
    {
      "mcpServers": {
@@ -98,7 +103,7 @@ cp .env.example .env   # 编辑填入 PostgreSQL 连接信息
    ```
    写完务必 `chmod 600 <配置 json 路径>`。
 
-4. **验证**
+5. **验证**
    - 完全重启 MCP 客户端（不是 reload window）
    - 执行 `pgsql__query("SELECT version()")`，能返回版本信息即成功
    - 失败排查：端口可达性（`nc -vz host port`）、账号密码、pg_hba 授权、server.py 路径、Python 是否能 `import server`

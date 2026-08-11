@@ -164,10 +164,16 @@ print(f'表数: {len(list(o.list_tables()))}')
 
 ## 安装
 
+### Step 0: 获取源码
+
+```bash
+git clone https://github.com/data-joke/mcps.git
+cd mcps/odps_mcp
+```
+
 ### Step 1: 安装 Python 包
 
 ```bash
-cd odps_mcp
 pip install -e .
 ```
 
@@ -205,23 +211,29 @@ pip install mcp pyodps pandas openpyxl
 ````markdown
 你是 MCP 安装助手，帮我安装 `odps-mcp`（一个通过 MCP 协议操作阿里云 MaxCompute/ODPS 的工具）。
 
-- 启动命令：`python -m odps_mcp`（依赖 `odps-mcp` Python 包，先 `pip install odps-mcp`）
 - 通信：stdio
 - 安装步骤（按顺序执行，每步向用户确认）：
 
-1. **采集信息**——4 个环境变量**全部必填**，不要用任何默认值，请先问用户以下 4 个值：
+1. **获取源码**——先让用户确定下载目录，然后执行：
+   ```bash
+   git clone https://github.com/data-joke/mcps.git
+   cd mcps/odps_mcp
+   ```
+
+2. **采集信息**——4 个环境变量**全部必填**，不要用任何默认值，请先问用户以下 4 个值：
    - `ODPS_ACCESS_ID`：阿里云 AccessKey ID（RAM 子账号，权限最小化）
    - `ODPS_ACCESS_KEY`：AccessKey Secret（创建时只显示一次）
    - `ODPS_PROJECT`：MaxCompute 项目名（DataWorks 工作空间详情可查）
    - `ODPS_ENDPOINT`：项目所在 region 的 endpoint，如 `http://service.cn-shenzhen.maxcompute.aliyun.com/api`
    - 明确告知：密钥会以明文写入 MCP 客户端配置，文件将 `chmod 600`
 
-2. **装依赖**
+3. **装依赖**
    ```bash
-   pip install odps-mcp
+   cd <源码所在目录>/odps_mcp
+   pip install -e .
    ```
 
-3. **写入 MCP 客户端配置**（按用户所用客户端写入对应 JSON，结构如下）
+4. **写入 MCP 客户端配置**（按用户所用客户端写入对应 JSON，结构如下）
    ```json
    {
      "mcpServers": {
@@ -241,7 +253,7 @@ pip install mcp pyodps pandas openpyxl
    ```
    写完务必 `chmod 600 <配置 json 路径>`。
 
-4. **验证**
+5. **验证**
    - 完全重启 MCP 客户端（不是 reload window）
    - 执行 `odps__odps_query_data("SELECT GETDATE()")`，能返回时间即成功
    - 失败排查：4 个变量是否齐全、AccessKey 是否有项目权限、endpoint region 是否与项目一致
@@ -429,11 +441,12 @@ odps_upload_data(
 odps_mcp/
 ├── pyproject.toml          # 项目配置和依赖
 ├── README.md               # 本文件
-├── LICENSE                 # MIT
 └── odps_mcp/
     ├── __init__.py
     └── server.py           # MCP Server 实现（6 个工具）
 ```
+
+> 注：本目录位于 monorepo 仓库 `data-joke/mcps` 内，LICENSE 在仓库根目录。
 
 ---
 

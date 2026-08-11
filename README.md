@@ -30,8 +30,8 @@
 
 通用步骤：
 
-1. `git clone <本仓库>` 
-2. 进入目标子目录，`pip install -r requirements.txt`（odps 为 `pip install -e .` 或 `pip install odps-mcp`）
+1. `git clone https://github.com/data-joke/mcps.git`
+2. 进入目标子目录，`pip install -r requirements.txt`（odps 为 `pip install -e .`）
 3. 把连接配置写入 MCP 客户端配置的 `env` 字段（或本目录 `.env`）
 4. 重启 MCP 客户端，跑一个轻量查询验证
 
