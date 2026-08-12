@@ -1,0 +1,10 @@
+# 环境变量（含 API 密钥，严禁上传）
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 测试/临时文件
+_test*.py

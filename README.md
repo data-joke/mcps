@@ -1,18 +1,20 @@
-# 数据库 MCP 工具集（mcps）
+# MCP 工具集（mcps）
 
-通过 MCP 协议（stdio）操作三类数据库的本地工具集，全部为**单文件/轻量 Python**，可接入所有支持 MCP 的客户端（Claude Code、Codex CLI 等）。
+通过 MCP 协议（stdio）提供**数据库操作**与**图片识别**能力的本地工具集，全部为**单文件/轻量 Python**，可接入所有支持 MCP 的客户端（Claude Code、Codex CLI 等）。
 
-| MCP | 数据库 | 技术栈 | 工具集 | 目录 |
+| MCP | 定位 | 技术栈 | 工具集 | 目录 |
 | --- | --- | --- | --- | --- |
-| **mysql-mcp** | MySQL | FastMCP + PyMySQL | 查询 / 导出 / 万能执行 / 表结构 | [`mysql-mcp/`](mysql-mcp/) |
-| **pgsql-mcp** | PostgreSQL | FastMCP + asyncpg | 查询 / 导出 / 结构浏览 / 列采样 | [`pgsql-mcp/`](pgsql-mcp/) |
+| **mysql-mcp** | MySQL 数据库 | FastMCP + PyMySQL | 查询 / 导出 / 万能执行 / 表结构 | [`mysql-mcp/`](mysql-mcp/) |
+| **pgsql-mcp** | PostgreSQL 数据库 | FastMCP + asyncpg | 查询 / 导出 / 结构浏览 / 列采样 | [`pgsql-mcp/`](pgsql-mcp/) |
 | **odps-mcp** | 阿里云 MaxCompute (ODPS) | 官方 MCP SDK + pyodps | 查询 / 导出 / 元数据 / DDL·DML / 上传 | [`odps_mcp/`](odps_mcp/) |
+| **image-recognizer** | 图片识别（多模态） | FastMCP + openai | 单张/批量识别 / 格式查询 / 视觉拒绝重试 | [`image-recognizer/`](image-recognizer/) |
 
 ## 选哪个
 
 - 日常本地 MySQL 操作 → `mysql-mcp`
 - PostgreSQL 库结构探索 + 查询导出 → `pgsql-mcp`
 - 阿里云数仓（MaxCompute/ODPS）取数、建表、导入 → `odps-mcp`
+- 识别图片（URL / 本地文件 / Base64），把多模态转为文本 → `image-recognizer`
 
 ## 通用特性
 
